@@ -1,0 +1,54 @@
+package javatraining;
+class main {
+    public static void displayArray(int[] arr) {
+        System.out.print("Given Series: ");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+    public static int findMultiplicationFactor(int[] arr) {
+        return arr[1] / arr[0];
+    }
+    public static int findDifference(int[] arr) {
+        return arr[1] - arr[2];
+    }
+    public static boolean validatePattern(int[] arr, int mul, int diff) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (i % 2 == 0) {
+                if (arr[i] * mul != arr[i + 1]) {
+                    return false;
+                }
+            } else {
+                if (arr[i] - diff != arr[i + 1]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public static int findNextNumber(int[] arr, int mul, int diff) {
+        int n = arr.length;
+        if (n % 2 == 1) {
+            return arr[n - 1] * mul;
+        } else {
+            return arr[n - 1] - diff;
+        }
+    }
+    public static void main(String[] args) {
+        int arr[] = {3, 9, 8, 24, 23};
+        displayArray(arr);
+        int multiplyFactor = findMultiplicationFactor(arr);
+        int difference = findDifference(arr);
+        System.out.println("Detected Multiplication Factor: " + multiplyFactor);
+        System.out.println("Detected Difference: " + difference);
+        boolean isValid = validatePattern(arr, multiplyFactor, difference);
+        if (isValid) {
+            System.out.println("Pattern is valid (× and - alternating)");
+            int next = findNextNumber(arr, multiplyFactor, difference);
+            System.out.println("Next number in series: " + next);
+        } else {
+            System.out.println("Pattern not detected properly!");
+        }
+    }
+}
