@@ -1,0 +1,82 @@
+import java.util.Scanner;
+
+class ATM {
+    private int balance = 5000;   // initial balance
+    private int pin = 1234;       // default PIN
+
+    boolean verifyPin(int enteredPin) {
+        return enteredPin == pin;
+    }
+
+    void deposit(int amount) {
+        balance += amount;
+        System.out.println("Deposited: " + amount);
+    }
+
+    void withdraw(int amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount);
+        } else {
+            System.out.println("Insufficient Balance");
+        }
+    }
+
+    void checkBalance() {
+        System.out.println("Current Balance: " + balance);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ATM atm = new ATM();
+
+        System.out.print("Enter PIN: ");
+        int enteredPin = sc.nextInt();
+
+        if (atm.verifyPin(enteredPin)) {
+            int choice;
+
+            do {
+                System.out.println("\n--- ATM MENU ---");
+                System.out.println("1. Deposit");
+                System.out.println("2. Withdraw");
+                System.out.println("3. Check Balance");
+                System.out.println("4. Exit");
+
+                System.out.print("Enter choice: ");
+                choice = sc.nextInt();
+
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter amount: ");
+                        int d = sc.nextInt();
+                        atm.deposit(d);
+                        break;
+
+                    case 2:
+                        System.out.print("Enter amount: ");
+                        int w = sc.nextInt();
+                        atm.withdraw(w);
+                        break;
+
+                    case 3:
+                        atm.checkBalance();
+                        break;
+
+                    case 4:
+                        System.out.println("Thank you! Visit again.");
+                        break;
+
+                    default:
+                        System.out.println("Invalid choice");
+                }
+
+            } while (choice != 4);
+
+        } else {
+            System.out.println("Incorrect PIN");
+        }
+    }
+}
