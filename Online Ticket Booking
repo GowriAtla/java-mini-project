@@ -1,0 +1,69 @@
+import java.util.Scanner;
+
+class TicketSystem {
+    int availableSeats = 10;
+
+    void showSeats() {
+        System.out.println("Available Seats: " + availableSeats);
+    }
+
+    void bookTicket(int seats) {
+        if (seats <= availableSeats) {
+            availableSeats -= seats;
+            System.out.println(seats + " ticket(s) booked successfully!");
+        } else {
+            System.out.println("Not enough seats available!");
+        }
+    }
+
+    void cancelTicket(int seats) {
+        availableSeats += seats;
+        System.out.println(seats + " ticket(s) cancelled!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        TicketSystem ts = new TicketSystem();
+
+        int choice;
+
+        do {
+            System.out.println("\n--- ONLINE TICKET BOOKING ---");
+            System.out.println("1. View Available Seats");
+            System.out.println("2. Book Ticket");
+            System.out.println("3. Cancel Ticket");
+            System.out.println("4. Exit");
+
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    ts.showSeats();
+                    break;
+
+                case 2:
+                    System.out.print("Enter number of seats to book: ");
+                    int b = sc.nextInt();
+                    ts.bookTicket(b);
+                    break;
+
+                case 3:
+                    System.out.print("Enter number of seats to cancel: ");
+                    int c = sc.nextInt();
+                    ts.cancelTicket(c);
+                    break;
+
+                case 4:
+                    System.out.println("Thank you for using the system!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 4);
+    }
+}
