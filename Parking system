@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+class ParkingSystem {
+    int capacity = 5;
+    int occupied = 0;
+
+    void parkVehicle() {
+        if (occupied < capacity) {
+            occupied++;
+            System.out.println("Vehicle parked successfully!");
+        } else {
+            System.out.println("Parking Full!");
+        }
+    }
+
+    void removeVehicle() {
+        if (occupied > 0) {
+            occupied--;
+            System.out.println("Vehicle removed!");
+        } else {
+            System.out.println("Parking is already empty!");
+        }
+    }
+
+    void showStatus() {
+        System.out.println("Total Slots: " + capacity);
+        System.out.println("Occupied: " + occupied);
+        System.out.println("Available: " + (capacity - occupied));
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ParkingSystem ps = new ParkingSystem();
+
+        int choice;
+
+        do {
+            System.out.println("\n--- PARKING SYSTEM ---");
+            System.out.println("1. Park Vehicle");
+            System.out.println("2. Remove Vehicle");
+            System.out.println("3. Show Status");
+            System.out.println("4. Exit");
+
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    ps.parkVehicle();
+                    break;
+
+                case 2:
+                    ps.removeVehicle();
+                    break;
+
+                case 3:
+                    ps.showStatus();
+                    break;
+
+                case 4:
+                    System.out.println("Thank you!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 4);
+    }
+}
